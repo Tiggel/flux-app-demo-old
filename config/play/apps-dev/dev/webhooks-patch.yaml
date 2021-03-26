@@ -7,8 +7,6 @@ spec:
     webhooks:
       - name: acceptance-test
         url: http://flagger-loadtester.dev/
-        metadata:
-          cmd: "curl -sd 'test' http://podinfo-canary.dev:9898/token | grep token"
       - name: load-test
         url: http://flagger-loadtester.dev/
         metadata:
