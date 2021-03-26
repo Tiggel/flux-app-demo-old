@@ -6,3 +6,6 @@ bases:
 - ../../../../lib/debug
 - ../../../../lib/podinfo
 - ../../../../lib/canary
+
+patchesStrategicMerge:
+  - webhooks-patch.yaml
