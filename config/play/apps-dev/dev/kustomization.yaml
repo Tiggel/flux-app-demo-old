@@ -5,3 +5,4 @@ bases:
 - ../../../../lib/tester
 - ../../../../lib/debug
 - ../../../../lib/podinfo
+- ../../../../lib/canary
