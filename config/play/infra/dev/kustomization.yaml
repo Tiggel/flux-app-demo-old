@@ -4,3 +4,6 @@ namespace: dev
 bases:
 - ../../../../lib/netpolicy
 - namespace.yaml
+- ab_namespace.yaml
+- canary_namespace.yaml
+- bluegreen_namespace.yaml
