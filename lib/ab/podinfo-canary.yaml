@@ -2,6 +2,7 @@ apiVersion: flagger.app/v1beta1
 kind: Canary
 metadata:
   name: podinfo
+  namespace: test
 spec:
   # deployment reference
   targetRef:
@@ -17,37 +18,34 @@ spec:
     kind: HorizontalPodAutoscaler
     name: podinfo
   service:
-    # service port number
+    # container port
     port: 9898
-    # container port number or name (optional)
-    targetPort: 9898
     # Istio gateways (optional)
     gateways:
       - public-gateway.istio-system.svc.cluster.local
     # Istio virtual service host names (optional)
-    #hosts:
-    #  - app.example.com
+    hosts:
+      - app.example.com
     # Istio traffic policy (optional)
     trafficPolicy:
       tls:
         # use ISTIO_MUTUAL when mTLS is enabled
         mode: DISABLE
-    # Istio retry policy (optional)
-    retries:
-      attempts: 3
-      perTryTimeout: 1s
-      retryOn: "gateway-error,connect-failure,refused-stream"
   analysis:
     # schedule interval (default 60s)
     interval: 1m
-    # max number of failed metric checks before rollback
-    threshold: 5
-    # max traffic percentage routed to canary
-    # percentage (0-100)
-    maxWeight: 50
-    # canary increment step
-    # percentage (0-100)
-    stepWeight: 10
+    # total number of iterations
+    iterations: 10
+    # max number of failed iterations before rollback
+    threshold: 2
+    # canary match condition
+    match:
+      - headers:
+          user-agent:
+            regex: ".*Firefox.*"
+      - headers:
+          cookie:
+            regex: "^(.*?;)?(type=insider)(;.*)?$"
     metrics:
       - name: request-success-rate
         # minimum req success rate (non 5xx responses)
@@ -61,10 +59,10 @@ spec:
         thresholdRange:
           max: 500
         interval: 30s
-    # testing (optional)
+    # generate traffic during analysis
     webhooks:
       - name: load-test
         url: http://flagger-loadtester.ab/
-        timeout: 5s
+        timeout: 15s
         metadata:
-          cmd: "hey -z 1m -q 10 -c 2 http://podinfo-canary.ab:9898/"
+          cmd: "hey -z 1m -q 10 -c 2 -H 'Cookie: type=insider' http://podinfo.ab:9898/"
