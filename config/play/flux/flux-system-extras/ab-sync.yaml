@@ -1,0 +1,29 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: GitRepository
+metadata:
+  name: ab
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: ab
+  secretRef:
+    name: flux-system
+  url: ssh://git@github.com/Tiggel/flux-app-demo
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: ab
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  path: ./config/play/apps-ab
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: ab
+  validation: client
+  dependsOn:
+    - name: infra

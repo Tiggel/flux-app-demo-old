@@ -2,12 +2,12 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: stage
+  name: canary
   namespace: flux-system
 spec:
   interval: 1m0s
   ref:
-    branch: stage
+    branch: canary
   secretRef:
     name: flux-system
   url: ssh://git@github.com/Tiggel/flux-app-demo
@@ -15,15 +15,15 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: stage
+  name: canary
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./config/play/apps-stage
+  path: ./config/play/apps-canary
   prune: true
   sourceRef:
     kind: GitRepository
-    name: stage
+    name: canary
   validation: client
   dependsOn:
     - name: infra

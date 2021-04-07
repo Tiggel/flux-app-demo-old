@@ -2,12 +2,12 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: dev
+  name: bluegreen
   namespace: flux-system
 spec:
   interval: 1m0s
   ref:
-    branch: dev
+    branch: bluegreen
   secretRef:
     name: flux-system
   url: ssh://git@github.com/Tiggel/flux-app-demo
@@ -15,15 +15,15 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: dev
+  name: bluegreen
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./config/play/apps-dev
+  path: ./config/play/apps-blue-green
   prune: true
   sourceRef:
     kind: GitRepository
-    name: dev
+    name: bluegreen
   validation: client
   dependsOn:
     - name: infra

@@ -5,3 +5,24 @@ metadata:
   name: dev
   labels:
     istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ab
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: canary
+  labels:
+    istio-injection: enabled
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bluegreen
+  labels:
+    istio-injection: enabled

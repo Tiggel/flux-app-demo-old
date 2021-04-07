@@ -4,7 +4,7 @@ namespace: dev
 bases:
 - ../../../../lib/tester
 - ../../../../lib/debug
-- ../../../../lib/canary
+- ../../../../lib/ab
 - ../../../../lib/podinfo
 
 #patchesStrategicMerge:
