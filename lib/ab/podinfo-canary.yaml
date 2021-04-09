@@ -32,9 +32,9 @@ spec:
         mode: DISABLE
   analysis:
     # schedule interval (default 60s)
-    interval: 1m
+    interval: 20s
     # total number of iterations
-    iterations: 10
+    iterations: 5
     # max number of failed iterations before rollback
     threshold: 2
     # canary match condition
