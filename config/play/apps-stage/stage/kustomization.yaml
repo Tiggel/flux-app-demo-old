@@ -1,11 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: dev
+namespace: stage
 bases:
-- ../../../../lib/tester
 - ../../../../lib/debug
-- ../../../../lib/canary
 - ../../../../lib/podinfo
-
-#patchesStrategicMerge:
-#  - webhooks-patch.yaml
