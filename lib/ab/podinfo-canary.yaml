@@ -36,7 +36,7 @@ spec:
     # total number of iterations
     iterations: 5
     # max number of failed iterations before rollback
-    threshold: 2
+    threshold: 3
     # canary match condition
     match:
       #- headers:
