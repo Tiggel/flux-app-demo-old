@@ -2,12 +2,12 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
-  name: canary
+  name: bluegreen
   namespace: flux-system
 spec:
   interval: 1m0s
   ref:
-    branch: canary-demo
+    branch: bluegreen
   secretRef:
     name: flux-system
   url: ssh://git@github.com/Tiggel/flux-app-demo
@@ -19,11 +19,11 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./config/play/apps-canary/canary
+  path: ./config/play/apps-canary/bluegreen
   prune: true
   sourceRef:
     kind: GitRepository
-    name: canary
+    name: bluegreen
   validation: client
   dependsOn:
     - name: infra
