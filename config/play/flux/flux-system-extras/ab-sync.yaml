@@ -19,7 +19,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./config/play/apps-ab
+  path: ./config/play/apps-canary/ab
   prune: true
   sourceRef:
     kind: GitRepository

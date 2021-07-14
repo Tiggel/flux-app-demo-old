@@ -19,7 +19,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./config/play/apps-blue-green
+  path: ./config/play/apps-canary/bluegreen
   prune: true
   sourceRef:
     kind: GitRepository

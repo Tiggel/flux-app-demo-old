@@ -7,7 +7,7 @@ metadata:
 spec:
   interval: 1m0s
   ref:
-    branch: canary
+    branch: canary-demo
   secretRef:
     name: flux-system
   url: ssh://git@github.com/Tiggel/flux-app-demo
@@ -19,7 +19,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m0s
-  path: ./config/play/apps-canary
+  path: ./config/play/apps-canary/canary
   prune: true
   sourceRef:
     kind: GitRepository
